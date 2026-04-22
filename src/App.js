@@ -1,10 +1,132 @@
 import { motion } from "framer-motion";
-import { FaEnvelope, FaPhoneAlt, FaLinkedin, FaGithub, FaLeaf, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaPhoneAlt,
+  FaLinkedin,
+  FaGithub,
+  FaLeaf,
+  FaBars,
+  FaTimes,
+  FaArrowLeft,
+} from "react-icons/fa";
 import { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import "./App.css";
 import profile from "./profile.jpg";
 
-function App() {
+import p1cover from "./assets/projects/project1/cover.jpg";
+import p1img1 from "./assets/projects/project1/photo1.jpg";
+import p1img2 from "./assets/projects/project1/photo2.jpg";
+
+import p3cover from "./assets/projects/project3/cover.jpg";
+import p3img1 from "./assets/projects/project3/photo1.jpg";
+import p3video from "./assets/projects/project3/video1.mp4";
+
+import p4cover from "./assets/projects/project4/cover.jpg";
+import p4img1 from "./assets/projects/project4/photo1.jpg";
+
+const projects = [
+  {
+    id: 1,
+    title: "LONO PUREX",
+    shortDescription: "Plasma-based hybrid water purification and surface sterilization system.",
+    fullDescription:
+      "LONO PUREX is a collaborative innovation designed as a plasma-based hybrid water purification and surface sterilization system. It integrates plasma corona discharge, aeration, and ultraviolet irradiation into one compact and energy-efficient system. Through this hybrid process, the system generates highly reactive oxygen species such as hydroxyl radicals, atomic oxygen, ozone, and hydrogen peroxide. These reactive species help degrade microbial pathogens, pesticide residues, and organic contaminants without creating harmful chemical by-products. The system operates on low power and supports practical real-world applications including household water purification, agricultural post-harvest washing, food processing, and healthcare sterilization.",
+    cover: p1cover,
+    images: [p1img1, p1img2],
+    video: null,
+    exhibition: "Pro Food Pro Pack Agri Biz 2025",
+    tech: [
+      "Plasma Corona Discharge",
+      "UV Irradiation",
+      "Aeration",
+      "Water Purification",
+      "Surface Sterilization",
+      "Low Power Design",
+    ],
+  },
+  {
+    id: 3,
+    title: "AQUA INTEL",
+    shortDescription: "Arduino-based smart boat for real-time water quality monitoring.",
+    fullDescription:
+      "AQUA INTEL is an innovative Arduino-based autonomous boat developed for smart water quality monitoring. It is equipped with multiple sensors to measure key parameters including pH, temperature, electrical conductivity, total dissolved solids, water depth, salinity, and visibility. The system collects real-time environmental data while navigating through water bodies, reducing the need for manual sampling and repeated laboratory testing. With integrated GPS and communication modules, AQUA INTEL supports remote monitoring and accurate location tracking. This project demonstrates the integration of IoT, automation, and environmental science to support sustainable water resource management.",
+    cover: p3cover,
+    images: [p3img1],
+    video: p3video,
+    exhibition: "Winner – Best Green Innovation | Pro Food Pro Pack Agri Biz 2024",
+    tech: [
+      "Arduino",
+      "IoT",
+      "Water Quality Sensors",
+      "GPS",
+      "Automation",
+      "Environmental Monitoring",
+    ],
+  },
+  {
+    id: 4,
+    title: "Compo Tech",
+    shortDescription: "Automated compost bin for efficient organic waste management.",
+    fullDescription:
+      "Compo Tech is an innovative automated composting system designed to manage organic waste efficiently in urban environments. The system converts kitchen and biodegradable waste into compost through a controlled and automated process. It manages important composting functions such as timed rotation for mixing and temperature control to maintain suitable conditions for faster and more effective decomposition. Users can add organic waste easily while the system performs most of the composting work with minimal manual effort. This project promotes sustainable waste management, reduces environmental pollution, and encourages eco-friendly living practices.",
+    cover: p4cover,
+    images: [p4img1],
+    video: null,
+    exhibition: "Pro Food Pro Pack Agri Biz 2025",
+    tech: [
+      "Automation",
+      "Temperature Control",
+      "Timed Rotation",
+      "Waste Management",
+      "Composting System",
+      "Sustainable Technology",
+    ],
+  },
+];
+
+function Navbar({ menuOpen, setMenuOpen, activeSection }) {
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <nav className="navbar">
+      <a href="#home" className="nav-logo">
+        <FaLeaf className="logo-icon" />
+        Navindu
+      </a>
+
+      <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+        <a href="#home" onClick={closeMenu} className={activeSection === "home" ? "active" : ""}>
+          Home
+        </a>
+        <a href="#about" onClick={closeMenu} className={activeSection === "about" ? "active" : ""}>
+          About
+        </a>
+        <a href="#skills" onClick={closeMenu} className={activeSection === "skills" ? "active" : ""}>
+          Skills
+        </a>
+        <a href="#projects" onClick={closeMenu} className={activeSection === "projects" ? "active" : ""}>
+          Projects
+        </a>
+        <a href="#contact" onClick={closeMenu} className={activeSection === "contact" ? "active" : ""}>
+          Contact
+        </a>
+      </div>
+
+      <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+    </nav>
+  );
+}
+
+function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
@@ -21,32 +143,24 @@ function App() {
     "Agricultural Data Analytics",
   ];
 
-  const projects = [
-    {
-      title: "Portfolio Website",
-      description: "Modern personal portfolio website with responsive design and animations.",
-    },
-    {
-      title: "Sales Dashboard",
-      description: "Dashboard for analyzing sales data and identifying business insights.",
-    },
-    {
-      title: "Water Quality System",
-      description: "IoT based monitoring concept with sensors, alerts, and live tracking.",
-    },
-  ];
-
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
+
     const onScroll = () => {
       let current = "home";
+
       sections.forEach((section) => {
         const sectionTop = section.offsetTop - 120;
         const sectionHeight = section.offsetHeight;
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+
+        if (
+          window.scrollY >= sectionTop &&
+          window.scrollY < sectionTop + sectionHeight
+        ) {
           current = section.getAttribute("id");
         }
       });
+
       if (window.scrollY < 200) current = "home";
       setActiveSection(current);
     };
@@ -57,32 +171,17 @@ function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const closeMenu = () => setMenuOpen(false);
-
   return (
     <div className="app">
       <div className="floating-shape shape1"></div>
       <div className="floating-shape shape2"></div>
       <div className="floating-shape shape3"></div>
 
-      <nav className="navbar">
-        <a href="#home" className="nav-logo">
-          <FaLeaf className="logo-icon" />
-          Navindu
-        </a>
-
-        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <a href="#home" onClick={closeMenu} className={activeSection === "home" ? "active" : ""}>Home</a>
-          <a href="#about" onClick={closeMenu} className={activeSection === "about" ? "active" : ""}>About</a>
-          <a href="#skills" onClick={closeMenu} className={activeSection === "skills" ? "active" : ""}>Skills</a>
-          <a href="#projects" onClick={closeMenu} className={activeSection === "projects" ? "active" : ""}>Projects</a>
-          <a href="#contact" onClick={closeMenu} className={activeSection === "contact" ? "active" : ""}>Contact</a>
-        </div>
-
-        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </button>
-      </nav>
+      <Navbar
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        activeSection={activeSection}
+      />
 
       <section className="section hero" id="home">
         <div className="bg-circle circle1"></div>
@@ -221,19 +320,31 @@ function App() {
           viewport={{ once: false, amount: 0.3 }}
         >
           <h2>Projects</h2>
+
           <div className="project-grid">
             {projects.map((project, index) => (
               <motion.div
-                key={index}
-                className="project-card"
-                whileHover={{ y: -10, scale: 1.03 }}
+                key={project.id}
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.12, duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
+                <Link to={`/project/${project.id}`} className="project-link">
+                  <motion.div
+                    className="project-card"
+                    whileHover={{ y: -10, scale: 1.03 }}
+                  >
+                    <img
+                      src={project.cover}
+                      alt={project.title}
+                      className="project-cover"
+                    />
+                    <h3>{project.title}</h3>
+                    <p>{project.shortDescription}</p>
+                    <span className="project-btn">View Details</span>
+                  </motion.div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -294,6 +405,117 @@ function App() {
         </motion.div>
       </section>
     </div>
+  );
+}
+
+function ProjectDetail() {
+  const { id } = useParams();
+  const project = projects.find((item) => item.id === parseInt(id));
+
+  if (!project) {
+    return (
+      <div className="detail-page">
+        <Link to="/" className="back-link">
+          <FaArrowLeft /> Back to Home
+        </Link>
+        <h1>Project not found</h1>
+      </div>
+    );
+  }
+
+  return (
+    <div className="detail-page">
+      <div className="detail-bg-circle detail-circle1"></div>
+      <div className="detail-bg-circle detail-circle2"></div>
+
+      <div className="detail-container">
+        <Link to="/" className="back-link">
+          <FaArrowLeft /> Back to Home
+        </Link>
+
+        <motion.div
+          className="detail-hero"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="detail-text">
+            <p className="detail-tag">PROJECT DETAILS</p>
+            <h1>{project.title}</h1>
+            <p className="detail-description">{project.fullDescription}</p>
+
+            <div className="detail-meta">
+              <div className="meta-box">
+                <h4>Exhibition / Achievement</h4>
+                <p>{project.exhibition}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="detail-cover-wrap">
+            <img src={project.cover} alt={project.title} className="detail-cover" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="detail-section"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.7 }}
+        >
+          <h2>Technologies / Key Areas</h2>
+          <div className="tech-grid">
+            {project.tech.map((item, index) => (
+              <div className="tech-pill" key={index}>
+                {item}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="detail-section"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.7 }}
+        >
+          <h2>Project Gallery</h2>
+          <div className="detail-gallery">
+            {project.images.map((image, index) => (
+              <img key={index} src={image} alt={`${project.title} ${index + 1}`} />
+            ))}
+          </div>
+        </motion.div>
+
+        {project.video && (
+          <motion.div
+            className="detail-section"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35, duration: 0.7 }}
+          >
+            <h2>Project Video</h2>
+            <div className="video-wrap">
+              <video controls className="detail-video">
+                <source src={project.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+      </Routes>
+    </Router>
   );
 }
 
