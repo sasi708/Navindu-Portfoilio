@@ -8,6 +8,8 @@ import {
   FaBars,
   FaTimes,
   FaArrowLeft,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import {
@@ -35,7 +37,8 @@ const projects = [
   {
     id: 1,
     title: "LONO PUREX",
-    shortDescription: "Plasma-based hybrid water purification and surface sterilization system.",
+    shortDescription:
+      "Plasma-based hybrid water purification and surface sterilization system.",
     fullDescription:
       "LONO PUREX is a collaborative innovation designed as a plasma-based hybrid water purification and surface sterilization system. It integrates plasma corona discharge, aeration, and ultraviolet irradiation into one compact and energy-efficient system. Through this hybrid process, the system generates highly reactive oxygen species such as hydroxyl radicals, atomic oxygen, ozone, and hydrogen peroxide. These reactive species help degrade microbial pathogens, pesticide residues, and organic contaminants without creating harmful chemical by-products. The system operates on low power and supports practical real-world applications including household water purification, agricultural post-harvest washing, food processing, and healthcare sterilization.",
     cover: p1cover,
@@ -50,13 +53,21 @@ const projects = [
       "Surface Sterilization",
       "Low Power Design",
     ],
+    isCollaborative: true,
+    team: [
+      "W.N.V. Weraniyagoda",
+      "S.D. Koshitha Bhagya Tharaka",
+      "W.A.R.K. Wickramasinghe",
+      "W.R.T.A. Bandara",
+    ],
   },
   {
     id: 3,
     title: "AQUA INTEL",
-    shortDescription: "Arduino-based smart boat for real-time water quality monitoring.",
+    shortDescription:
+      "Arduino-based smart boat for real-time water quality monitoring.",
     fullDescription:
-      "AQUA INTEL is an innovative Arduino-based autonomous boat developed for smart water quality monitoring. It is equipped with multiple sensors to measure key parameters including pH, temperature, electrical conductivity, total dissolved solids, water depth, salinity, and visibility. The system collects real-time environmental data while navigating through water bodies, reducing the need for manual sampling and repeated laboratory testing. With integrated GPS and communication modules, AQUA INTEL supports remote monitoring and accurate location tracking. This project demonstrates the integration of IoT, automation, and environmental science to support sustainable water resource management.",
+      "AQUA INTEL is an innovative Arduino-based project developed to monitor water quality in a smart and efficient manner. This autonomous boat is equipped with multiple sensors to measure key parameters such as pH, temperature, electrical conductivity, total dissolved solids (TDS), water depth, salinity, and visibility. The system collects real-time data while navigating through water bodies, significantly reducing the need for manual sampling and laboratory analysis. With integrated GPS and communication modules, AQUA INTEL enables remote monitoring and accurate location tracking, making it a practical solution for environmental monitoring.",
     cover: p3cover,
     images: [p3img1],
     video: p3video,
@@ -69,13 +80,20 @@ const projects = [
       "Automation",
       "Environmental Monitoring",
     ],
+    isCollaborative: true,
+    team: [
+      "W.N.V. Weraniyagoda",
+      "S.D. Koshitha Bhagya Tharaka",
+      "W.A.R.K. Wickramasinghe",
+    ],
   },
   {
     id: 4,
     title: "Compo Tech",
-    shortDescription: "Automated compost bin for efficient organic waste management.",
+    shortDescription:
+      "Automated compost bin for efficient organic waste management.",
     fullDescription:
-      "Compo Tech is an innovative automated composting system designed to manage organic waste efficiently in urban environments. The system converts kitchen and biodegradable waste into compost through a controlled and automated process. It manages important composting functions such as timed rotation for mixing and temperature control to maintain suitable conditions for faster and more effective decomposition. Users can add organic waste easily while the system performs most of the composting work with minimal manual effort. This project promotes sustainable waste management, reduces environmental pollution, and encourages eco-friendly living practices.",
+      "Compo Tech is an innovative automated composting system designed to efficiently manage organic waste in urban environments. This smart compost bin is developed to convert kitchen and biodegradable waste into compost through a controlled and automated process. The system is programmed to manage key composting functions such as timed rotation and temperature control, ensuring optimal conditions for faster and more effective decomposition. It promotes sustainable waste management, reduces environmental pollution, and encourages eco-friendly practices.",
     cover: p4cover,
     images: [p4img1],
     video: null,
@@ -87,6 +105,13 @@ const projects = [
       "Waste Management",
       "Composting System",
       "Sustainable Technology",
+    ],
+    isCollaborative: true,
+    team: [
+      "W.N.V. Weraniyagoda",
+      "S.D. Koshitha Bhagya Tharaka",
+      "W.A.R.K. Wickramasinghe",
+      "G.K. Pasindu Dilhan",
     ],
   },
 ];
@@ -102,19 +127,39 @@ function Navbar({ menuOpen, setMenuOpen, activeSection }) {
       </a>
 
       <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-        <a href="#home" onClick={closeMenu} className={activeSection === "home" ? "active" : ""}>
+        <a
+          href="#home"
+          onClick={closeMenu}
+          className={activeSection === "home" ? "active" : ""}
+        >
           Home
         </a>
-        <a href="#about" onClick={closeMenu} className={activeSection === "about" ? "active" : ""}>
+        <a
+          href="#about"
+          onClick={closeMenu}
+          className={activeSection === "about" ? "active" : ""}
+        >
           About
         </a>
-        <a href="#skills" onClick={closeMenu} className={activeSection === "skills" ? "active" : ""}>
+        <a
+          href="#skills"
+          onClick={closeMenu}
+          className={activeSection === "skills" ? "active" : ""}
+        >
           Skills
         </a>
-        <a href="#projects" onClick={closeMenu} className={activeSection === "projects" ? "active" : ""}>
+        <a
+          href="#projects"
+          onClick={closeMenu}
+          className={activeSection === "projects" ? "active" : ""}
+        >
           Projects
         </a>
-        <a href="#contact" onClick={closeMenu} className={activeSection === "contact" ? "active" : ""}>
+        <a
+          href="#contact"
+          onClick={closeMenu}
+          className={activeSection === "contact" ? "active" : ""}
+        >
           Contact
         </a>
       </div>
@@ -225,10 +270,11 @@ function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.7 }}
             >
-              I am an Agriculture undergraduate with a strong interest in Agri-Technology,
-              ICT-driven solutions, and programming. I am committed to integrating agricultural
-              knowledge with modern technologies such as data analytics, Internet of Things,
-              and smart farming systems to enhance productivity, promote sustainability,
+              I am an Agriculture undergraduate with a strong interest in
+              Agri-Technology, ICT-driven solutions, and programming. I am
+              committed to integrating agricultural knowledge with modern
+              technologies such as data analytics, Internet of Things, and smart
+              farming systems to enhance productivity, promote sustainability,
               and support informed decision-making in agriculture.
             </motion.p>
 
@@ -238,8 +284,12 @@ function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.7 }}
             >
-              <a href="#projects" className="btn">View Projects</a>
-              <a href="#contact" className="btn btn-outline">Contact Me</a>
+              <a href="#projects" className="btn">
+                View Projects
+              </a>
+              <a href="#contact" className="btn btn-outline">
+                Contact Me
+              </a>
             </motion.div>
           </motion.div>
 
@@ -275,10 +325,11 @@ function HomePage() {
         >
           <h2>About Me</h2>
           <p>
-            I am an Agriculture undergraduate with a strong interest in Agri-Technology,
-            ICT-driven solutions, and programming. I am committed to integrating agricultural
-            knowledge with modern technologies such as data analytics, Internet of Things,
-            and smart farming systems to enhance productivity, promote sustainability,
+            I am an Agriculture undergraduate with a strong interest in
+            Agri-Technology, ICT-driven solutions, and programming. I am
+            committed to integrating agricultural knowledge with modern
+            technologies such as data analytics, Internet of Things, and smart
+            farming systems to enhance productivity, promote sustainability,
             and support informed decision-making in agriculture.
           </p>
         </motion.div>
@@ -411,17 +462,42 @@ function HomePage() {
 function ProjectDetail() {
   const { id } = useParams();
   const project = projects.find((item) => item.id === parseInt(id));
+  const [selectedImage, setSelectedImage] = useState(null);
 
   if (!project) {
     return (
       <div className="detail-page">
-        <Link to="/" className="back-link">
-          <FaArrowLeft /> Back to Home
-        </Link>
-        <h1>Project not found</h1>
+        <div className="detail-container">
+          <Link to="/" className="back-link">
+            <FaArrowLeft /> Back to Home
+          </Link>
+          <h1>Project not found</h1>
+        </div>
       </div>
     );
   }
+
+  const openImage = (index) => {
+    setSelectedImage(index);
+  };
+
+  const closeImage = () => {
+    setSelectedImage(null);
+  };
+
+  const showPrev = (e) => {
+    e.stopPropagation();
+    setSelectedImage((prev) =>
+      prev === 0 ? project.images.length - 1 : prev - 1
+    );
+  };
+
+  const showNext = (e) => {
+    e.stopPropagation();
+    setSelectedImage((prev) =>
+      prev === project.images.length - 1 ? 0 : prev + 1
+    );
+  };
 
   return (
     <div className="detail-page">
@@ -453,9 +529,29 @@ function ProjectDetail() {
           </div>
 
           <div className="detail-cover-wrap">
-            <img src={project.cover} alt={project.title} className="detail-cover" />
+            <img
+              src={project.cover}
+              alt={project.title}
+              className="detail-cover"
+            />
           </div>
         </motion.div>
+
+        {project.isCollaborative && (
+          <motion.div
+            className="detail-section"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.7 }}
+          >
+            <h2>👥 Team Members (Collaborative Project)</h2>
+            <ul className="team-list">
+              {project.team.map((member, index) => (
+                <li key={index}>{member}</li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
 
         <motion.div
           className="detail-section"
@@ -482,7 +578,13 @@ function ProjectDetail() {
           <h2>Project Gallery</h2>
           <div className="detail-gallery">
             {project.images.map((image, index) => (
-              <img key={index} src={image} alt={`${project.title} ${index + 1}`} />
+              <img
+                key={index}
+                src={image}
+                alt={`${project.title} ${index + 1}`}
+                className="clickable-gallery-image"
+                onClick={() => openImage(index)}
+              />
             ))}
           </div>
         </motion.div>
@@ -504,6 +606,39 @@ function ProjectDetail() {
           </motion.div>
         )}
       </div>
+
+      {selectedImage !== null && (
+        <div className="image-modal" onClick={closeImage}>
+          <button
+            className="modal-close"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeImage();
+            }}
+          >
+            <FaTimes />
+          </button>
+
+          {project.images.length > 1 && (
+            <button className="modal-nav modal-prev" onClick={showPrev}>
+              <FaChevronLeft />
+            </button>
+          )}
+
+          <img
+            src={project.images[selectedImage]}
+            alt="Selected"
+            className="modal-image"
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          {project.images.length > 1 && (
+            <button className="modal-nav modal-next" onClick={showNext}>
+              <FaChevronRight />
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
